@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" xmlns="http://logging.apache.org/log4j/2.0/config">
+    <Appenders>
+        <!-- Консольный аппендер -->
+<!--        <Console name="Console" target="SYSTEM_OUT">-->
+<!--            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>-->
+<!--        </Console>-->
+
+        <!-- Файловый аппендер с ротацией -->
+        <RollingFile name="FileAppender"
+                     fileName="target/logfile_test.log"
+                     filePattern="target/logfile_test-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+         Логгер для вашего приложения
+
+        <Logger name="edu.javacourse.studentorder" level="fatal" additivity="false">
+<!--            <AppenderRef ref="Console"/>-->
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <Logger name="edu.javacourse.studentorder.dao" level="info" additivity="false">
+<!--            <AppenderRef ref="Console"/>-->
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+
+        <!-- Корневой логгер -->
+        <Root level="info">
+<!--            <AppenderRef ref="Console"/>-->
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>
